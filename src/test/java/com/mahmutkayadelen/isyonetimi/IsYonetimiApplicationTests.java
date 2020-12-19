@@ -1,12 +1,12 @@
 package com.mahmutkayadelen.isyonetimi;
 
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-//@SpringBootTest
+@SpringBootTest
 class IsYonetimiApplicationTests {
 
-	//@Test
+	@Test
 	void contextLoads() {
 	}
 
