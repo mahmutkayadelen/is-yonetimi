@@ -1,5 +1,6 @@
 package com.mahmutkayadelen.isyonetimi.dto;
 
+import com.mahmutkayadelen.isyonetimi.entity.IssueStatus;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ public class IssueDto {
     private String details;
     private Date date;
     private UserDto assignee;
+    private IssueStatus issueStatus;
     private ProjectDto project;
 
 }

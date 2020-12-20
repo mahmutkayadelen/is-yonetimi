@@ -2,16 +2,16 @@ package com.mahmutkayadelen.isyonetimi.controller;
 
 import com.mahmutkayadelen.isyonetimi.dto.ProjectDto;
 import com.mahmutkayadelen.isyonetimi.service.impl.ProjectServiceImpl;
+import com.mahmutkayadelen.isyonetimi.util.ApiPaths;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
  *Created by mahmutkayadelen on 17 12 2020
  *
- *
  */
 @RestController
-@RequestMapping("/project")
+@RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 public class ProjectController  {
 
     private final ProjectServiceImpl projectServiceImpl;
@@ -28,14 +28,25 @@ public class ProjectController  {
         return ResponseEntity.ok(projectDto);
     }
     @PostMapping
-    public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto project) throws IllegalAccessException {
+    public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto project)  {
       ProjectDto p =  projectServiceImpl.save(project);
     return ResponseEntity.ok(p);
     }
     @PutMapping
     public ResponseEntity<ProjectDto> updateProject(@RequestBody ProjectDto project) throws IllegalAccessException {
-        ProjectDto p =  projectServiceImpl.save(project);
+        ProjectDto p =  projectServiceImpl.update(project);
         return ResponseEntity.ok(p);
     }
-    //Put update için kullanılır.
+    /*@RequestMapping(path = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<ProjectDto> updateProject(@RequestBody ProjectDto project) throws IllegalAccessException {
+        ProjectDto p =  projectServiceImpl.update(project);
+        return ResponseEntity.ok(p);
+    }*/
+    @DeleteMapping("/{id}")
+  public ResponseEntity<Boolean>  delete(@PathVariable(value = "id", required = true) Long id){
+
+
+        return ResponseEntity.ok(projectServiceImpl.delete(id));
+    }
+
 }
