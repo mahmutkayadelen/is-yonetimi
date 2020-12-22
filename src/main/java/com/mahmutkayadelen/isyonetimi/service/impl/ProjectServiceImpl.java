@@ -27,7 +27,6 @@ public class ProjectServiceImpl implements ProjectService {
         }
         Project projeckCheck = projectRepository.getAllByProjectCode(project.getProjectCode());
         if (projeckCheck != null) {
-            System.out.println("project code başka bir projede kullanılmaktadır.");
             throw new IllegalArgumentException("project code başka bir projede kullanılmaktadır.");
         }
         Project p = modelMapper.map(project, Project.class);
