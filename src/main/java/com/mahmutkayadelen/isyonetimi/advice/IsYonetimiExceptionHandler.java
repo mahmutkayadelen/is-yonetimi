@@ -1,5 +1,6 @@
 package com.mahmutkayadelen.isyonetimi.advice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
@@ -31,9 +32,12 @@ import java.util.Date;
  */
 @ControllerAdvice
 @RestController
+@Slf4j
 public class IsYonetimiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleExceptions(Exception ex, WebRequest request) {
+        log.error("ControllerAdvice -> Exception handler ->" , ex,request);
+
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage());
         return new ResponseEntity<>(exceptionResponse, getExceptionStatus(ex) );
     }
