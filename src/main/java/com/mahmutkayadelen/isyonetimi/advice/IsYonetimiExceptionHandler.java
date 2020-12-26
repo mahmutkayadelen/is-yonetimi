@@ -39,7 +39,7 @@ public class IsYonetimiExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("ControllerAdvice -> Exception handler ->" , ex,request);
 
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage());
-        return new ResponseEntity<>(exceptionResponse, getExceptionStatus(ex) );
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.EXPECTATION_FAILED);
     }
     public static HttpStatus getExceptionStatus(Exception ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

@@ -3,9 +3,11 @@ package com.mahmutkayadelen.isyonetimi.controller;
 import com.mahmutkayadelen.isyonetimi.dto.ProjectDto;
 import com.mahmutkayadelen.isyonetimi.service.impl.ProjectServiceImpl;
 import com.mahmutkayadelen.isyonetimi.util.ApiPaths;
+import com.mahmutkayadelen.isyonetimi.util.Tpage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +37,13 @@ public class ProjectController {
         projectDto = projectServiceImpl.getById(id);
         return ResponseEntity.ok(projectDto);
     }
-
+    @GetMapping("/pagination")
+    @ApiOperation(value = "Get By Pagination Operation", response = ProjectDto.class)
+    public ResponseEntity<Tpage<ProjectDto>> getAllByPagination(Pageable pageable) {
+        log.info("ProjectController -> getAllByPagination  çağrıldı.");
+        Tpage<ProjectDto>  data = projectServiceImpl.getAllPageable(pageable);
+        return ResponseEntity.ok(data);
+    }
     @PostMapping
     @ApiOperation(value = "Create Project Operation", response = ProjectDto.class)
     public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto project) {

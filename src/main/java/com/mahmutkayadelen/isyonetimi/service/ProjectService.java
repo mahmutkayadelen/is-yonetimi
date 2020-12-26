@@ -2,6 +2,7 @@ package com.mahmutkayadelen.isyonetimi.service;
 
 import com.mahmutkayadelen.isyonetimi.dto.ProjectDto;
 import com.mahmutkayadelen.isyonetimi.entity.Project;
+import com.mahmutkayadelen.isyonetimi.util.Tpage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,7 +14,7 @@ public interface ProjectService {
 
     ProjectDto getById(Long id);
 
-    Page<Project> getAllPageable(Pageable pageable);
+    Tpage<ProjectDto> getAllPageable(Pageable pageable);
     Boolean delete(Project project);
     Boolean delete(Long id);
 

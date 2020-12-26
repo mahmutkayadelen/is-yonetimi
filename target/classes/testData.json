@@ -1,0 +1,18 @@
+[
+  {
+    "_class" : "com.mahmutkayadelen.isyonetimi.entity.Project",
+    "projectName" :"İş yönetimi Projesi",
+    "projectCode" : "Project1"
+  },
+  {
+    "_class" : "com.mahmutkayadelen.isyonetimi.entity.Project",
+    "projectName" :"Facebook projesi",
+    "projectCode" : "Project2"
+
+  },
+  {
+    "_class" : "com.mahmutkayadelen.isyonetimi.entity.Project",
+    "projectName" :"Facebook projesi",
+    "projectCode" : "Project3"
+  }
+]
