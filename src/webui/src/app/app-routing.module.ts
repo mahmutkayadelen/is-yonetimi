@@ -5,9 +5,9 @@ const routes: Routes = [
   {
     path:'',
     children:[
-      {path: '', pathMatch: 'full', redirectTo: 'issue'},
+      {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       {path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule'},
-      {path: 'issue', loadChildren: './pages/issues/issue.module#IssueModule'},
+      {path: 'issue', loadChildren: './pages/issue/issue.module#IssueModule'},
       {path: 'project', loadChildren: './pages/project/project.module#ProjectModule'}
 
     ]
