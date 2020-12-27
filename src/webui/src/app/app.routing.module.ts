@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {AppLayoutComponent} from "./_layout/app-layout/app-layout.component";
 
 const routes: Routes = [
   {
-    path:'',
-    children:[
+    path: '', component: AppLayoutComponent,
+    children: [
       {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       {path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule'},
       {path: 'issue', loadChildren: './pages/issue/issue.module#IssueModule'},
       {path: 'project', loadChildren: './pages/project/project.module#ProjectModule'}
-
     ]
   }
 ];
@@ -18,4 +18,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

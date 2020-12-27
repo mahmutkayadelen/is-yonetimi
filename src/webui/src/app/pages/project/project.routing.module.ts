@@ -1,9 +1,8 @@
-import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
 import {ProjectComponent} from "./project.component";
 
-
-const  routes: Routes =[
+const routes: Routes = [
   {
     path: '',
     component: ProjectComponent
@@ -11,12 +10,7 @@ const  routes: Routes =[
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-
-  }
-)
-export  class  ProjectRoutingModule{ }
-
-
-//örneğin isyonetimi.com/issues/... altındaındaki bütün menlerin yönetilmesini sağlayacak diğer ekranlar içinde aynısı geçerli
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ProjectRoutingModule { }
