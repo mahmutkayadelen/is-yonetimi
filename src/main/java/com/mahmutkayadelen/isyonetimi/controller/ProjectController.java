@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 /**
  * Created by mahmutkayadelen on 17 12 2020
  */
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(ApiPaths.ProjectCtrl.CTRL)
 @Api(value = ApiPaths.ProjectCtrl.CTRL, description = "Project APIs")
 @Slf4j
+@CrossOrigin
 public class ProjectController {
 
     private final ProjectServiceImpl projectServiceImpl;
@@ -57,6 +60,9 @@ public class ProjectController {
         ProjectDto p = projectServiceImpl.update(project);
         return ResponseEntity.ok(p);
     }
+
+
+
 
     /*@RequestMapping(path = "/update", method = RequestMethod.PUT)
     public ResponseEntity<ProjectDto> updateProject(@RequestBody ProjectDto project) throws IllegalAccessException {
