@@ -1,7 +1,16 @@
 {
-  "Dashboard" : "Dashboard",
-  "Project List" : "Project List",
-  "Project Add" : "New Project",
-  "Project Edit Screen" : "Project Add / Update"
-
+  "Dashboard": "Dashboard",
+  "Project List": "Project List",
+  "Project Add": "New Project",
+  "Project Edit Screen": "Project Add / Update",
+  "Project Code is required": "Project Code is required",
+  "Project Code should be min 2 char": "Project Code should be min 2 char",
+  "Project Code should be max 10 char": "Project Code should be max 10 char",
+  "Project Name is required": "Project Name is required",
+  "Project Name should be min 4 char": "Project Code should be min 4 char",
+  "Project Name should be max 100 char": "Project Name should be max 100 char",
+  "Close" : "Close",
+  "Save" : "Save",
+  "Project Code" : "Project Code",
+  "Project Name" : "Project Name"
 }

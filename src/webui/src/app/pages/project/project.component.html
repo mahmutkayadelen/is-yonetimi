@@ -4,14 +4,15 @@
     <div class="col-sm-4"><h3>   {{ 'Project List' | translate }} </h3></div>
     <div class="col-sm-7"></div>
     <div class="col-sm-1">
-      <button type="button" class="btn btn-primary" (click)="openModal(template)"> {{'Project Add' | translate}}</button>
+      <button type="button" class="btn btn-primary"
+              (click)="openModal(template)"> {{'Project Add' | translate}}</button>
     </div>
   </div>
 
-<ngx-datatable
+  <ngx-datatable
     class="bootstrap"
     [rows]="rows"
-    [columns] ="cols"
+    [columns]="cols"
     [columnMode]="'force'"
     [headerHeight]="50"
     [footerHeight]="50"
@@ -32,13 +33,38 @@
       </button>
     </div>
     <div class="modal-body">
-      This is a modal.
-    </div>
-    <div class="modal-footer">
-      Footer
-    </div>
-  </ng-template>
+      <form [formGroup]="projectForm" (ngSubmit)="saveProject()">
+        <div class="form-group">
+          <label>{{'Project Code'|translate}}</label>
+          <input type="text" formControlName="projectCode" class="form-control"
+                 [ngClass]="{'is-invalid':f.projectCode.errors}" />
+          <div *ngIf="f.projectCode.errors" class="invalid-feedback">
+            <div *ngIf="f.projectCode.errors.required">{{'Project Code is required'|translate}}</div>
+            <div *ngIf="f.projectCode.errors.minLength">{{'Project Code should be min 2 char'|translate}}</div>
+            <div *ngIf="f.projectCode.errors.maxLength">{{'Project Code should be max 10 char'|translate}}</div>
+          </div>
 
+        </div>
+
+        <div class="form-group">
+          <label>{{'Project Name'|translate}}</label>
+          <input type="text" formControlName="projectName" class="form-control"  [ngClass]="{'is-invalid':f.projectName.errors}" />
+          <div *ngIf="f.projectName.errors" class="invalid-feedback">
+            <div *ngIf="f.projectName.errors.required">{{'Project Name is required'|translate}}</div>
+            <div *ngIf="f.projectName.errors.minLength">{{'Project Name should be min 4 char'|translate}}</div>
+            <div *ngIf="f.projectName.errors.maxLength">{{'Project Name should be max 100 char'|translate}}</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" (click)="closeAndResetModal()" > {{'Close' |translate}} </button>
+          <button class="btn btn-success" type="submit" >{{'Save' | translate}} </button>
+
+        </div>
+      </form>
+    </div>
+
+
+  </ng-template>
 
 
 </div>

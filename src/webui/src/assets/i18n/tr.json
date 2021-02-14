@@ -2,5 +2,16 @@
   "Dashboard" : "Anasayfa",
   "Project List" : "Proje Listesi",
   "Project Add" : "Yeni Proje",
-  "Project Edit Screen" : "Proje Ekleme/ Güncelleme"
+  "Project Edit Screen" : "Proje Ekleme/ Güncelleme",
+  "Project Code is required" : "Proje Kodu Zorunludur",
+  "Project Code should be min 2 char" : "Proje Kodu En az 2 Karakterden oluşmalır",
+  "Project Code should be max 10 char" : "Proje kodu en fazla 10 karakterden oluşmalıdır",
+  "Project Name is required" : "Projec Adı Zorunlu Alandır.",
+  "Project Name should be min 4 char" : "Proje Adı En az 4 Karakter Olmalı",
+  "Project Name should be max 100 char" : "Projec adı en fazla 100 karakter olmalı",
+  "Close" : "Vazgeç",
+  "Save" : "Kaydet",
+  "Project Code" : "Projec Kodu",
+  "Project Name" : "Projec Adı"
+
 }

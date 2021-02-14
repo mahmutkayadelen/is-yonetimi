@@ -3,6 +3,7 @@ import {ProjectService} from "../../services/shared/project.service";
 import {Page} from "../../common/page";
 import {Project} from "../../common/project.model";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -17,20 +18,38 @@ export class ProjectComponent implements OnInit {
   cols=[{prop :'id',name :'No'},
     {   prop :'projectName',name: 'Project Name',sortable:false},
     {  prop: 'projectCode',name : 'Project Code'}];
+  private projectForm: FormGroup;
 
-  constructor(private projectService: ProjectService,private modalService: BsModalService) {
+  constructor(private projectService: ProjectService,private modalService: BsModalService, private formBuilder:FormBuilder) {
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
   ngOnInit() {
-
     this.setPage({offset: 0});
-
-
+    this.projectForm = this.formBuilder.group({
+      'projectName' :[null,[Validators.required,Validators.minLength(4)]],
+      'projectCode' :[null,[Validators.required,Validators.minLength(2),Validators.maxLength(10)]]
+    });
   }
-
-
+get f(){return this.projectForm.controls}
+  closeAndResetModal(){
+    this.projectForm.reset();
+    this.modalRef.hide();
+  }
+  saveProject(){
+    if(!this.projectForm.valid)
+    {
+      return;
+    }
+    this.projectService.createProject(this.projectForm.value).subscribe(
+      response =>{
+        console.log(response);
+      }
+    )
+    this.closeAndResetModal();
+    this.setPage(this.page);
+  }
   private setPage(pageInfo) {
     this.page.page = pageInfo.offset;
     this.projectService.getAll(pageInfo).subscribe(
