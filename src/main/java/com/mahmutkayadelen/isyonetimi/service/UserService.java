@@ -1,18 +1,25 @@
 package com.mahmutkayadelen.isyonetimi.service;
 
+import com.mahmutkayadelen.isyonetimi.dto.UserDto;
 import com.mahmutkayadelen.isyonetimi.entity.User;
-import org.springframework.data.domain.Page;
+import com.mahmutkayadelen.isyonetimi.util.Tpage;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * Create by mkayadelen 14.12.2020
  */
 public interface UserService {
-    User save(User user);
+    UserDto save(UserDto user);
 
     User getById(Long id);
 
-    Page<User> getAllPageable(Pageable pageable);
+    Tpage<UserDto> getAllPageable(Pageable pageable);
+
+    List<UserDto> getAll();
+
+    Boolean delete(Long id);
 
 
 }
