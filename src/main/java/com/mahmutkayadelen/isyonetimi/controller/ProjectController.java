@@ -70,10 +70,10 @@ public class ProjectController {
         return ResponseEntity.ok(p);
     }*/
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     @ApiOperation(value = "Create Delete Operation", response = Boolean.class)
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id", required = true) Long id) {
-
-
+        System.out.println("silinecek "+id);
         return ResponseEntity.ok(projectServiceImpl.delete(id));
     }
 

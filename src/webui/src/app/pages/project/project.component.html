@@ -24,9 +24,12 @@
     [count]="page.totalElements"
     [offset]="page.page"
     [limit]="page.size"
-    (page)='setPage($event)'
-  >
+    (page)='setPage($event)' >
   </ngx-datatable>
+  <ng-template #tplProjectDeleteCell let-row ="row" let-value="value">
+    <button (click)="showDeleteConfirmation(value)"> <i class="fa fa-trash" ></i></button>
+
+  </ng-template>
 
   <ng-template #template>
     <div class="modal-header">

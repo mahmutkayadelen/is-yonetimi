@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ProjectService} from "../../services/shared/project.service";
 import {Page} from "../../common/page";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
@@ -12,13 +12,14 @@ import {ConfirmationComponent} from "../../shared/confirmation/confirmation.comp
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit {
+  @ViewChild( 'tplProjectDeleteCell') tplProjectDeleteCell:TemplateRef<any>;
+
   modalRef: BsModalRef;
   page = new Page();
   rows =[];
-  cols=[{prop :'id',name :'No'},
-    {   prop :'projectName',name: 'Project Name',sortable:false},
-    {  prop: 'projectCode',name : 'Project Code'}];
+  cols=[];
   private projectForm: FormGroup;
+
 
   constructor(private projectService: ProjectService,private modalService: BsModalService, private formBuilder:FormBuilder) {
   }
@@ -26,6 +27,11 @@ export class ProjectComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
   ngOnInit() {
+    this.cols=[{prop :'id',name :'No'},
+      {   prop :'projectName',name: 'Project Name',sortable:false},
+      {  prop: 'projectCode',name : 'Project Code'},
+      {  prop: 'id',name : 'Actions', cellTemplate:this.tplProjectDeleteCell,flexGrow : 1,sortable:false}
+    ];
     this.setPage({offset: 0});
     this.projectForm = this.formBuilder.group({
       'projectName' :[null,[Validators.required,Validators.minLength(4)]],
@@ -63,23 +69,28 @@ get f(){return this.projectForm.controls}
     );
   }
 
-   showDeleteConfirmation(){
+   showDeleteConfirmation(value:any):void{
     const modal = this.modalService.show(ConfirmationComponent);
-    (<ConfirmationComponent>modal.content).showConfirmation('test heade content','test body content'
+    (<ConfirmationComponent>modal.content).showConfirmation('Silinsin mi','Silmek istermisiniz?'
 
     );
     (<ConfirmationComponent>modal.content).onClose.subscribe(
       result =>{
         if(result===true)
         {
-          console.log("Evet tıklandı")
+          console.log("valueess",value)
+          this.projectService.delete(value).subscribe(response =>{
+            this.setPage({offset:0});
+            }
+          );
+
         }
         else if(result ===false)
         {
           console.log("Hayır tıklandı")
-
         }
       }
     );
   }
+
 }
