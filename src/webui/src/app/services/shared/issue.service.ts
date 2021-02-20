@@ -5,7 +5,7 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 export class IssueService {
-  private ISSUES_PATH = "/issue";
+  private ISSUES_PATH = "/Issue";
 
   constructor(private apiService: ApiService) {
 
@@ -23,6 +23,21 @@ export class IssueService {
 
       }
     ));
+  }
+  getAllByPagination(page): Observable<any> {
+    console.log("Issue project");
+
+    console.log(page);
+    return this.apiService.get(this.ISSUES_PATH+'/pagination',page).pipe(map(
+      res => {
+        if (res) {
+          return res;
+        } else {
+          return{};
+        }
+
+      }
+    ) );
   }
 
   getById(id): Observable<any> {

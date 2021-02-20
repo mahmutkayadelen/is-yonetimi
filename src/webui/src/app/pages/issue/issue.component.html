@@ -1,3 +1,43 @@
 <div class="content-wrapper">
-  issue works!
+
+  <div class="row">
+    <div class="col-sm-4"><h3>   {{ 'Issue List' | translate }} </h3></div>
+    <div class="col-sm-6">
+
+     <!-- <button type="button" class="btn btn-warning"  (click)="showDeleteConfirmation()"> Confirm control </button> -->
+
+    </div>
+    <div class="col-sm-2">
+      <!--<button type="button" class="btn btn-primary"  (click)="openModal(template)"> {{'Project Add' | translate}}</button>-->
+    </div>
+  </div>
+
+  <ngx-datatable
+    class="bootstrap"
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [externalPaging]="true"
+    [count]="page.totalElements"
+    [offset]="page.page"
+    [limit]="page.size"
+    (page)='setPage($event)' >
+    <ngx-datatable-column prop="id" name="No" sortable="true"></ngx-datatable-column>
+    <ngx-datatable-column prop="description" name="{{'Description'|translate}}" ></ngx-datatable-column>
+    <ngx-datatable-column prop="date" name="{{'Issue Date'|translate}}" ></ngx-datatable-column>
+    <ngx-datatable-column prop="issueStatus" name="{{'Status' |translate}}" ></ngx-datatable-column>
+    <ngx-datatable-column prop="assignee.nameSurname" name="{{'Assigne'|translate}}" ></ngx-datatable-column>
+    <ngx-datatable-column prop="project.projectName" name="{{'Project Name'|translate}}" ></ngx-datatable-column>
+    <ngx-datatable-column prop="project.manager.nameSurname" name="{{'Project Manager'|translate}}" ></ngx-datatable-column>
+    <ngx-datatable-column name="{{'Open Details'|translate}}" sortable="false" prop="id">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button md-icon-button (click)="goToDetail(value)" style="background-color:aqua;">
+          <i class="fa fa-umbrella" ></i>
+        </button>
+
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
 </div>

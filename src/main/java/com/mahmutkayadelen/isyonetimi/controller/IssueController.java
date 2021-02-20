@@ -5,8 +5,10 @@ import com.mahmutkayadelen.isyonetimi.dto.IssueDto;
 import com.mahmutkayadelen.isyonetimi.dto.ProjectDto;
 import com.mahmutkayadelen.isyonetimi.service.impl.IssueServiceImpl;
 import com.mahmutkayadelen.isyonetimi.util.ApiPaths;
+import com.mahmutkayadelen.isyonetimi.util.Tpage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 /**
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(ApiPaths.IssueCtrl.CTRL)
 @Api(value = ApiPaths.IssueCtrl.CTRL , description = "Issue APIs")
+@CrossOrigin
 public class IssueController {
     private final IssueServiceImpl issueServiceImpl;
 
@@ -48,6 +51,13 @@ public class IssueController {
     @ApiOperation(value = "Delete Issue Operation",response = IssueDto.class)
     public ResponseEntity<Boolean> deleteIssue(@PathVariable(value = "id", required = true) Long id) {
         return ResponseEntity.ok(issueServiceImpl.delete(id));
+    }
+
+    @GetMapping("/pagination")
+    @ApiOperation(value = "Get By Pagination Operation", response = IssueDto.class)
+    public ResponseEntity<Tpage<IssueDto>> getAllByPagination(Pageable pageable) {
+        Tpage<IssueDto>  data = issueServiceImpl.getAllPageable(pageable);
+        return ResponseEntity.ok(data);
     }
 
 }

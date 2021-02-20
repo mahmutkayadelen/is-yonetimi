@@ -15,5 +15,12 @@
   "Project Name" : "Project Name",
   "Yes": "Yes",
   "No" : "No",
-  "Project Manager" : "Project Manager"
+  "Project Manager" : "Project Manager",
+  "Description" : "Description",
+  "Open Details": "Open Details",
+  "Project Manager" : "Project Manager",
+  "Assigne": "Assigne",
+  "Status": "Status",
+  "Issue Date": "Issue Date",
+  "Issue List": "Issue List"
 }

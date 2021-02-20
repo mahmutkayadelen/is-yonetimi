@@ -15,6 +15,13 @@
   "Project Name" : "Projec Adı",
   "Yes": "Evet",
   "No" : "Hayır",
-  "Project Manager" : "Proje Yöneticisi"
+  "Project Manager" : "Proje Yöneticisi",
+  "Description" : "Bilgi",
+  "Open Details": "Detayı Aç",
+  "Project Manager": "Proje Yöneticisi",
+  "Assigne": "İşi Yapan",
+  "Status": "Durumu",
+  "Issue Date": "İş Tarihi",
+  "Issue List": "İş Listesi"
 
 }

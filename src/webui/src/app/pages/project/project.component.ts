@@ -14,15 +14,12 @@ import {UserService} from "../../services/shared/user.service";
 })
 export class ProjectComponent implements OnInit {
   @ViewChild( 'tplProjectDeleteCell') tplProjectDeleteCell:TemplateRef<any>;
-
   modalRef: BsModalRef;
   page = new Page();
   rows =[];
   cols=[];
   managerOptions=[]
   private projectForm: FormGroup;
-
-
   constructor(private projectService: ProjectService,
               private modalService: BsModalService,
               private formBuilder:FormBuilder,
@@ -37,7 +34,6 @@ export class ProjectComponent implements OnInit {
       {   prop :'projectName',name: 'Project Name',sortable:false},
       {  prop: 'projectCode',name : 'Project Code'},
       {  prop: 'manager.nameSurname',name : 'Manager'},
-
       {  prop: 'id',name : 'Actions', cellTemplate:this.tplProjectDeleteCell,flexGrow : 1,sortable:false}
     ];
     this.setPage({offset: 0});
@@ -73,7 +69,7 @@ get f(){return this.projectForm.controls}
   }
   private setPage(pageInfo) {
     this.page.page = pageInfo.offset;
-    this.projectService.getAll(pageInfo).subscribe(
+    this.projectService.getAll(this.page).subscribe(
       (pagedData) => {
         this.page.size = pagedData.size;
         this.page.page = pagedData.page;
@@ -83,7 +79,6 @@ get f(){return this.projectForm.controls}
       }
     );
   }
-
    showDeleteConfirmation(value:any):void{
     const modal = this.modalService.show(ConfirmationComponent);
     (<ConfirmationComponent>modal.content).showConfirmation('Silinsin mi','Silmek istermisiniz?'

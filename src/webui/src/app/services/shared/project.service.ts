@@ -12,6 +12,9 @@ export class ProjectService {
   }
 
   getAll(page): Observable<any> {
+    console.log("page project");
+
+    console.log(page);
     return this.apiService.get(this.PROJECT_PATH+'/pagination',page).pipe(map(
       res => {
         if (res) {
@@ -22,6 +25,20 @@ export class ProjectService {
 
       }
   ) );
+  }
+
+
+  getAllByPagination(page): Observable<any> {
+    return this.apiService.get(this.PROJECT_PATH+'/pagination',page).pipe(map(
+      res => {
+        if (res) {
+          return res;
+        } else {
+          return{};
+        }
+
+      }
+    ) );
   }
 
   getById(id): Observable<any> {
