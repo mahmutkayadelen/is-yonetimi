@@ -6,6 +6,7 @@ import {ConfirmationComponent} from './confirmation/confirmation.component';
 import {CommonModule} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { NotfoundComponent } from './notfound/notfound.component';
 export const createTranslateLoader = (http: HttpClient) => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
