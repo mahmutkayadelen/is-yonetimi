@@ -13,7 +13,9 @@ import java.util.List;
 public interface UserService {
     UserDto save(UserDto user);
 
-    User getById(Long id);
+    UserDto getById(Long id);
+
+    User getByIdForUser(Long id);
 
     Tpage<UserDto> getAllPageable(Pageable pageable);
 

@@ -7,6 +7,7 @@ import com.mahmutkayadelen.isyonetimi.util.ApiPaths;
 import com.mahmutkayadelen.isyonetimi.util.Tpage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +20,12 @@ import java.util.List;
  */
 
 
+
 @RestController
 @RequestMapping(ApiPaths.UserCtrl.CTRL)
 @Api(value = ApiPaths.UserCtrl.CTRL, description = "Users APIs")
+@Slf4j
+@CrossOrigin
 public class UserController {
     private final UserServiceImpl userServiceImpl;
 
@@ -53,5 +57,13 @@ public class UserController {
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
         UserDto p = userServiceImpl.save(user);
         return ResponseEntity.ok(p);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Get By Id", response = UserDto.class)
+    public ResponseEntity<UserDto> getBydId(@PathVariable("id") Long id) {
+        UserDto user;
+        user = userServiceImpl.getById(id);
+        return ResponseEntity.ok(user);
     }
 }

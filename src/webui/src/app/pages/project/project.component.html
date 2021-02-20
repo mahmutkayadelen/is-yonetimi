@@ -27,7 +27,7 @@
     (page)='setPage($event)' >
   </ngx-datatable>
   <ng-template #tplProjectDeleteCell let-row ="row" let-value="value">
-    <button (click)="showDeleteConfirmation(value)"> <i class="fa fa-trash" ></i></button>
+    <button (click)="showDeleteConfirmation(value)"> <i class="fa fa-trash"  align="right"></i></button>
 
   </ng-template>
 
@@ -61,6 +61,18 @@
             <div *ngIf="f.projectName.errors.maxLength">{{'Project Name should be max 100 char'|translate}}</div>
           </div>
         </div>
+
+        <div class="form-group">
+          <label>{{'Project Manager'|translate}}</label>
+          <select  formControlName="managerId" class="form-control"  [ngClass]="{'is-invalid':f.managerId.errors}" >
+            <option *ngFor="let managers of managerOptions" [value]="managers.id">{{managers.nameSurname}}</option>
+          </select>
+          <div *ngIf="f.managerId.errors" class="invalid-feedback">
+            <div *ngIf="f.managerId.errors.required">{{'Project Manager is required'|translate}}</div>
+
+          </div>
+        </div>
+
         <div class="modal-footer">
           <button class="btn btn-light" (click)="closeAndResetModal()" > {{'Close' |translate}} </button>
           <button class="btn btn-success" type="submit" >{{'Save' | translate}} </button>

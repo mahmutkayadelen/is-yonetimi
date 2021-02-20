@@ -1,7 +1,9 @@
 package com.mahmutkayadelen.isyonetimi.service.impl;
 
 import com.mahmutkayadelen.isyonetimi.dto.ProjectDto;
+import com.mahmutkayadelen.isyonetimi.dto.UserDto;
 import com.mahmutkayadelen.isyonetimi.entity.Project;
+import com.mahmutkayadelen.isyonetimi.entity.User;
 import com.mahmutkayadelen.isyonetimi.repository.ProjectRepository;
 import com.mahmutkayadelen.isyonetimi.service.ProjectService;
 import com.mahmutkayadelen.isyonetimi.util.Tpage;
@@ -10,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 @Service
@@ -18,10 +19,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ModelMapper modelMapper;
+    private final UserServiceImpl userServiceImpl;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ModelMapper modelMapper, UserServiceImpl userServiceImpl) {
         this.projectRepository = projectRepository;
         this.modelMapper = modelMapper;
+        this.userServiceImpl = userServiceImpl;
     }
 
     @Override
@@ -34,6 +37,8 @@ public class ProjectServiceImpl implements ProjectService {
             throw new IllegalArgumentException("project code başka bir projede kullanılmaktadır.");
         }
         Project p = modelMapper.map(project, Project.class);
+        User user = userServiceImpl.getByIdForUser(project.getManagerId());
+        p.setManager(user);
         p = projectRepository.save(p);
         project.setId(p.getId());
         return project;

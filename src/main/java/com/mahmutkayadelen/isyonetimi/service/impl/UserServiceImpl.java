@@ -1,7 +1,6 @@
 package com.mahmutkayadelen.isyonetimi.service.impl;
 
 import com.mahmutkayadelen.isyonetimi.dto.UserDto;
-import com.mahmutkayadelen.isyonetimi.entity.Project;
 import com.mahmutkayadelen.isyonetimi.entity.User;
 import com.mahmutkayadelen.isyonetimi.repository.UserRepository;
 import com.mahmutkayadelen.isyonetimi.service.UserService;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class UserServiceImpl implements UserService {
             if (user.getEmail() == null) {
                 throw new IllegalArgumentException("Email cannot be null!");
             }
-            if (user.getNameSurname()== null) {
+            if (user.getNameSurname() == null) {
                 throw new IllegalArgumentException("Name Surname cannot be null!");
             }
             User createdUser = modelMapper.map(user, User.class);
@@ -43,14 +41,16 @@ public class UserServiceImpl implements UserService {
         }
 
 
-
-
-
     }
 
+    @Override
+    public UserDto getById(Long id) {
+        User user = userRepository.getOne(id);
+        return modelMapper.map(user, UserDto.class);
+    }
 
     @Override
-    public User getById(Long id) {
+    public User getByIdForUser(Long id) {
         return userRepository.getOne(id);
     }
 

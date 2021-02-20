@@ -4,6 +4,7 @@ import {Page} from "../../common/page";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ConfirmationComponent} from "../../shared/confirmation/confirmation.component";
+import {UserService} from "../../services/shared/user.service";
 
 
 @Component({
@@ -18,24 +19,36 @@ export class ProjectComponent implements OnInit {
   page = new Page();
   rows =[];
   cols=[];
+  managerOptions=[]
   private projectForm: FormGroup;
 
 
-  constructor(private projectService: ProjectService,private modalService: BsModalService, private formBuilder:FormBuilder) {
+  constructor(private projectService: ProjectService,
+              private modalService: BsModalService,
+              private formBuilder:FormBuilder,
+              private userService: UserService) {
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
   ngOnInit() {
+
     this.cols=[{prop :'id',name :'No'},
       {   prop :'projectName',name: 'Project Name',sortable:false},
       {  prop: 'projectCode',name : 'Project Code'},
+      {  prop: 'manager.nameSurname',name : 'Manager'},
+
       {  prop: 'id',name : 'Actions', cellTemplate:this.tplProjectDeleteCell,flexGrow : 1,sortable:false}
     ];
     this.setPage({offset: 0});
     this.projectForm = this.formBuilder.group({
       'projectName' :[null,[Validators.required,Validators.minLength(4)]],
-      'projectCode' :[null,[Validators.required,Validators.minLength(2),Validators.maxLength(10)]]
+      'projectCode' :[null,[Validators.required,Validators.minLength(2),Validators.maxLength(10)]],
+      'managerId':[null,[Validators.required]]
+    });
+    this.userService.getAll().subscribe(res =>{
+      this.managerOptions=res;
+      console.log(res);
     });
   }
 get f(){return this.projectForm.controls}
@@ -44,6 +57,7 @@ get f(){return this.projectForm.controls}
     this.modalRef.hide();
   }
   saveProject(){
+
     if(!this.projectForm.valid)
     {
       return;
@@ -51,10 +65,11 @@ get f(){return this.projectForm.controls}
     this.projectService.createProject(this.projectForm.value).subscribe(
       response =>{
         console.log(response);
+        this.closeAndResetModal();
+        this.setPage(this.page);
       }
     )
-    this.closeAndResetModal();
-    this.setPage(this.page);
+
   }
   private setPage(pageInfo) {
     this.page.page = pageInfo.offset;
